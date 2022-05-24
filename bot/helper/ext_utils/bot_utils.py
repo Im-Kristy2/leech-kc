@@ -114,6 +114,17 @@ def get_progress_bar_string(status):
 def get_readable_message():
     with download_dict_lock:
         msg = ""
+        START = 0
+        num_active = 0
+        num_seeding = 0
+        num_upload = 0
+        for stats in list(download_dict.values()):
+            if stats.status() == MirrorStatus.STATUS_DOWNLOADING:
+               num_active += 1
+            if stats.status() == MirrorStatus.STATUS_UPLOADING:
+               num_upload += 1
+            if stats.status() == MirrorStatus.STATUS_SEEDING:
+               num_seeding += 1
         if STATUS_LIMIT is not None:
             tasks = len(download_dict)
             global pages
