@@ -195,12 +195,12 @@ class MirrorListener:
     def onUploadComplete(self, link: str, size, files, folders, typ, name: str):
         if not self.isPrivate and INCOMPLETE_TASK_NOTIFIER and DB_URI is not None:
             DbManger().rm_complete_task(self.message.link)
-        msg = f"<b>╭─📂Fɪʟᴇɴᴀᴍᴇ: </b><code>{escape(name)}</code>\n<b>├📦 Sɪᴢᴇ</b>{size}"
+        msg = f"<b>╭─📂Fɪʟᴇɴᴀᴍᴇ: </b><code>{escape(name)}</code>\n<b>├📦 Sɪᴢᴇ:</b>{size}"
         if self.isLeech:
             msg += f'\n<b>├🗃️ Tᴏᴛᴀʟ Fɪʟᴇs​: </b>{folders}'
             if typ != 0:
                 msg += f'\n<b>Corrupted Files: </b>{typ}'
-            msg += f'\n<b>╰─Rᴇǫ​: </b>{self.tag}\n\n'
+            msg += f'\n<b>╰─💫Rᴇǫ​: </b>{self.tag}\n\n'
             if not files:
                 sendMessage(msg, self.bot, self.message)
             else:
