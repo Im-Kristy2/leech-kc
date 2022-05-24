@@ -22,7 +22,7 @@ PAGE_NO = 1
 
 class MirrorStatus:
     STATUS_UPLOADING = "Uᴘʟᴏᴀᴅɪɴɢ...📥"
-    STATUS_DOWNLOADING = "Downloading...📥"
+    STATUS_DOWNLOADING = "Dᴏᴡɴʟᴏᴀᴅɪɴɢ...📥"
     STATUS_CLONING = "Cʟᴏɴɪɴɢ...♻️"
     STATUS_WAITING = "Qᴜᴇᴜᴇᴅ...📝"
     STATUS_FAILED = "Fᴀɪʟᴇᴅ 🚫. Cʟᴇᴀɴɪɴɢ Dᴏᴡɴʟᴏᴀᴅ 🧹..."
@@ -132,10 +132,10 @@ def get_readable_message():
             if PAGE_NO > pages and pages != 0:
                 globals()['COUNT'] -= STATUS_LIMIT
                 globals()['PAGE_NO'] -= 1
-        msg = f"<b> Downloading 📤: {num_active} || Uploading 📤: {num_upload} || Seeding 🌧: {num_seeding}</b>\n\n"       
+        msg = f"<b> Dᴏᴡɴʟᴏᴀᴅɪɴɢ 📤: {num_active} || Uᴘʟᴏᴀᴅɪɴɢ 📤: {num_upload} || Sᴇᴇᴅɪɴɢ 🌧: {num_seeding}</b>\n\n"       
         for index, download in enumerate(list(download_dict.values())[COUNT:], start=1):
-            msg += f"<b>Name:</b> <code>{escape(str(download.name()))}</code>"
-            msg += f"\n<b>Status:</b> <i>{download.status()}</i>"
+            msg += f"<b>• Fɪʟᴇɴᴀᴍᴇ:</b> <code>{escape(str(download.name()))}</code>"
+            msg += f"\n<b>Status:</b> <b>{download.status()}</b>"
             if download.status() not in [
                 MirrorStatus.STATUS_ARCHIVING,
                 MirrorStatus.STATUS_EXTRACTING,
@@ -150,6 +150,15 @@ def get_readable_message():
                 else:
                     msg += f"\n<b>Downloaded:</b> {get_readable_file_size(download.processed_bytes())} of {download.size()}"
                 msg += f"\n<b>Speed:</b> {download.speed()} | <b>ETA:</b> {download.eta()}"
+                if reply_to:
+                    msg += f"\n• Requested By: <a href='tg://user?id={download.message.from_user.id}'>{download.message.from_user.first_name}</a>(<code>{download.message.from_user.id}</code>)"
+                else:
+                    msg += f"\n• Requested By: <a href='tg://user?id={download.message.from_user.id}'>{download.message.from_user.first_name}</a>(<code>{download.message.from_user.id}</code>)"
+                try:
+                    msg += f"\n<i>Aria2📶</i> | • Seeders: {download.aria_download().num_seeders}" \
+                           f" | • Peers: {download.aria_download().connections}"
+                except:
+                    pass
                 try:
                     msg += f"\n<b>Seeders:</b> {download.aria_download().num_seeders}" \
                            f" | <b>Peers:</b> {download.aria_download().connections}"
