@@ -197,10 +197,10 @@ class MirrorListener:
             DbManger().rm_complete_task(self.message.link)
         msg = f"<b>╭─📂Fɪʟᴇɴᴀᴍᴇ: </b><code>{escape(name)}</code>\n<b>├📦 Sɪᴢᴇ</b>{size}"
         if self.isLeech:
-            msg += f'\n<b>Total Files: </b>{folders}'
+            msg += f'\n<b>├🗃️ Tᴏᴛᴀʟ Fɪʟᴇs​: </b>{folders}'
             if typ != 0:
                 msg += f'\n<b>Corrupted Files: </b>{typ}'
-            msg += f'\n<b>cc: </b>{self.tag}\n\n'
+            msg += f'\n<b>╰─Rᴇǫ​: </b>{self.tag}\n\n'
             if not files:
                 sendMessage(msg, self.bot, self.message)
             else:
