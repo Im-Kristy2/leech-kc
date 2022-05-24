@@ -21,17 +21,17 @@ PAGE_NO = 1
 
 
 class MirrorStatus:
-    STATUS_UPLOADING = "Uploading...📤"
+    STATUS_UPLOADING = "Uᴘʟᴏᴀᴅɪɴɢ...📥"
     STATUS_DOWNLOADING = "Downloading...📥"
-    STATUS_CLONING = "Cloning...♻️"
-    STATUS_WAITING = "Queued...💤"
-    STATUS_FAILED = "Failed 🚫. Cleaning Download..."
-    STATUS_PAUSE = "Paused...⛔️"
-    STATUS_ARCHIVING = "Archiving...🔐"
-    STATUS_EXTRACTING = "Extracting...📂"
-    STATUS_SPLITTING = "Splitting...✂️"
-    STATUS_CHECKING = "CheckingUp...📝"
-    STATUS_SEEDING = "Seeding...🌧"
+    STATUS_CLONING = "Cʟᴏɴɪɴɢ...♻️"
+    STATUS_WAITING = "Qᴜᴇᴜᴇᴅ...📝"
+    STATUS_FAILED = "Fᴀɪʟᴇᴅ 🚫. Cʟᴇᴀɴɪɴɢ Dᴏᴡɴʟᴏᴀᴅ 🧹..."
+    STATUS_PAUSE = "Pᴀᴜꜱᴇᴅ...⭕️"
+    STATUS_ARCHIVING = "Aʀᴄʜɪᴠɪɴɢ...🔐"
+    STATUS_EXTRACTING = "Exᴛʀᴀᴄᴛɪɴɢ...📂"
+    STATUS_SPLITTING = "Sᴘʟɪᴛᴛɪɴɢ...✂️"
+    STATUS_CHECKING = "CʜᴇᴄᴋɪɴɢUᴘ...📝"
+    STATUS_SEEDING = "Sᴇᴇᴅɪɴɢ...🌧"
 
 SIZE_UNITS = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
 
@@ -121,6 +121,7 @@ def get_readable_message():
             if PAGE_NO > pages and pages != 0:
                 globals()['COUNT'] -= STATUS_LIMIT
                 globals()['PAGE_NO'] -= 1
+        msg = f"<b> Downloading 📤: {num_active} || Uploading 📤: {num_upload} || Seeding 🌧: {num_seeding}</b>\n\n"       
         for index, download in enumerate(list(download_dict.values())[COUNT:], start=1):
             msg += f"<b>Name:</b> <code>{escape(str(download.name()))}</code>"
             msg += f"\n<b>Status:</b> <i>{download.status()}</i>"
