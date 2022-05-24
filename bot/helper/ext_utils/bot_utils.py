@@ -134,6 +134,7 @@ def get_readable_message():
                 globals()['PAGE_NO'] -= 1
         msg = f"<b> Dᴏᴡɴʟᴏᴀᴅɪɴɢ 📤: {num_active} || Uᴘʟᴏᴀᴅɪɴɢ 📤: {num_upload} || Sᴇᴇᴅɪɴɢ 🌧: {num_seeding}</b>\n\n"       
         for index, download in enumerate(list(download_dict.values())[COUNT:], start=1):
+            reply_to = download.message.reply_to_message
             msg += f"<b>• Fɪʟᴇɴᴀᴍᴇ:</b> <code>{escape(str(download.name()))}</code>"
             msg += f"\n<b>Status:</b> <b>{download.status()}</b>"
             if download.status() not in [
