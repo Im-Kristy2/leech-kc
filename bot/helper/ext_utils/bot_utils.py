@@ -178,31 +178,89 @@ def get_readable_message():
             msg += "\n\n"	
             if STATUS_LIMIT is not None and index == STATUS_LIMIT:	
                 break	
-        bmsg = f"<b>Cᴘᴜ:</b> {cpu_percent()}% | <b>Fʀᴇᴇ:</b> {get_readable_file_size(disk_usage(DOWNLOAD_DIR).free)}"	
-        bmsg += f"\n<b>Rᴀᴍ:</b> {virtual_memory().percent}% | <b>Uᴘᴛɪᴍᴇ:</b> {get_readable_time(time() - botStartTime)}"	
-        dlspeed_bytes = 0	
-        upspeed_bytes = 0	
-        for download in list(download_dict.values()):	
-            spd = download.speed()	
-            if download.status() == MirrorStatus.STATUS_DOWNLOADING:	
-                if 'K' in spd:	
-                    dlspeed_bytes += float(spd.split('K')[0]) * 1024	
-                elif 'M' in spd:	
-                    dlspeed_bytes += float(spd.split('M')[0]) * 1048576	
-            elif download.status() == MirrorStatus.STATUS_UPLOADING:	
-                if 'KB/s' in spd:	
-                    upspeed_bytes += float(spd.split('K')[0]) * 1024	
-                elif 'MB/s' in spd:	
-                    upspeed_bytes += float(spd.split('M')[0]) * 1048576	
-        bmsg += f"\n<b>Dʟ:</b> {get_readable_file_size(dlspeed_bytes)}/s | <b>Uʟ:</b> {get_readable_file_size(upspeed_bytes)}/s"	
+        currentTime = get_readable_time(time() - botStartTime)
+        for download in list(download_dict.values()):
+            speedy = download.speed()
+            if download.status() == MirrorStatus.STATUS_DOWNLOADING:
+                if 'K' in speedy:
+                    dlspeed_bytes += float(speedy.split('K')[0]) * 1024
+                elif 'M' in speedy:
+                    dlspeed_bytes += float(speedy.split('M')[0]) * 1048576
+            if download.status() == MirrorStatus.STATUS_UPLOADING:
+                if 'KB/s' in speedy:
+                    uldl_bytes += float(speedy.split('K')[0]) * 1024
+                elif 'MB/s' in speedy:
+                    uldl_bytes += float(speedy.split('M')[0]) * 1048576
+        dlspeed = get_readable_file_size(dlspeed_bytes)
+        ulspeed = get_readable_file_size(uldl_bytes)
+        msg += f"\n📖 Pages: {PAGE_NO}/{pages} | 📝 Tasks: {tasks}"
+        msg += f"\nBOT UPTIME: <code>{currentTime}</code>"
+        msg += f"\nDL: {dlspeed}/s🔻 | UL: {ulspeed}/s🔺"
+        buttons = ButtonMaker()
+        buttons.sbutton("🔄", str(ONE))
+        buttons.sbutton("❌", str(TWO))
+        buttons.sbutton("📈", str(THREE))
+        sbutton = InlineKeyboardMarkup(buttons.build_menu(3))	
         if STATUS_LIMIT is not None and tasks > STATUS_LIMIT:	
-            msg += f"<b>Pᴀɢᴇ:</b> {PAGE_NO}/{pages} | <b>Tᴀsᴋs:</b> {tasks}\n"	
-            buttons = ButtonMaker()	
-            buttons.sbutton("Pʀᴇᴠɪᴏᴜs", "status pre")	
-            buttons.sbutton("Nᴇxᴛ", "status nex")	
-            button = InlineKeyboardMarkup(buttons.build_menu(2))	
-            return msg + bmsg, button	
-        return msg + bmsg, ""	
+            buttons = ButtonMaker()
+            buttons.sbutton("⬅️", "status pre")
+            buttons.sbutton("❌", str(TWO))
+            buttons.sbutton("➡️", "status nex")
+            buttons.sbutton("🔄", str(ONE))
+            buttons.sbutton("📈", str(THREE))
+            button = InlineKeyboardMarkup(buttons.build_menu(3))
+            return msg, button
+        return msg, sbutton
+                
+ONE, TWO, THREE = range(3)
+                
+def refresh(update, context):
+    chat_id  = update.effective_chat.id
+    query = update.callback_query
+    user_id = update.callback_query.from_user.id
+    query.edit_message_text(text="Refreshing...👻")
+    sleep(1)
+    query.answer(text="Refreshed", show_alert=False)
+    
+def close(update, context):  
+    chat_id  = update.effective_chat.id
+    user_id = update.callback_query.from_user.id
+    bot = context.bot
+    query = update.callback_query
+    admins = bot.get_chat_member(chat_id, user_id).status in ['creator', 'administrator'] or user_id in [OWNER_ID] 
+    if admins: 
+        query.answer()  
+        query.message.delete() 
+    else:  
+        query.answer(text="Nice Try, Get Lost🥱.\n\nOnly Admins can use this.", show_alert=True)
+        
+def stats(update, context):
+    query = update.callback_query
+    stats = bot_sys_stats()
+    query.answer(text=stats, show_alert=True)
+
+def bot_sys_stats():
+    currentTime = get_readable_time(time() - botStartTime)
+    cpu = cpu_percent(interval=0.5)
+    memory = virtual_memory()
+    mem = memory.percent
+    total, used, free, disk= disk_usage('/')
+    total = get_readable_file_size(total)
+    used = get_readable_file_size(used)
+    free = get_readable_file_size(free)
+    recv = get_readable_file_size(net_io_counters().bytes_recv)
+    sent = get_readable_file_size(net_io_counters().bytes_sent)
+    stats = f"""
+BOT UPTIME: {currentTime}
+CPU: {progress_bar(cpu)} {cpu}%
+RAM: {progress_bar(mem)} {mem}%
+DISK: {progress_bar(disk)} {disk}%
+TOTAL: {total}
+USED: {used} || FREE: {free}
+SENT: {sent} || RECV: {recv}
+#KristyCloud
+"""
+    return stats	
 
 def turn(data):	
     try:	
