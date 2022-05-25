@@ -154,9 +154,7 @@ def get_readable_message():
                 if reply_to:	
                     msg += f"\n• Aᴅᴅᴇᴅ Bʏ: <a href='tg://user?id={download.message.from_user.id}'>{download.message.from_user.first_name}</a> (<code>{download.message.from_user.id}</code>)"	
                 else:	
-                    msg += f"\n• Aᴅᴅᴇᴅ Bʏ: <a href='tg://user?id={download.message.from_user.id}'>{download.message.from_user.first_name}</a> (<code>{download.message.from_user.id}</code>)"	
-                except:	
-                    pass	
+                    msg += f"\n• Aᴅᴅᴇᴅ Bʏ: <a href='tg://user?id={download.message.from_user.id}'>{download.message.from_user.first_name}</a> (<code>{download.message.from_user.id}</code>)"		
                 try:	
                     msg += f"\n<b>• Sᴇᴇᴅʀs:</b> {download.aria_download().num_seeders}" \	
                            f" | <b>• Pᴇᴇʀs:</b> {download.aria_download().connections}"	
