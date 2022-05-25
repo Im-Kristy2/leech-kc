@@ -152,9 +152,9 @@ def get_readable_message():
                     msg += f"\n<b>• Dᴏᴡɴʟᴏᴀᴅᴇᴅ:</b> {get_readable_file_size(download.processed_bytes())} of {download.size()}"
                 msg += f"\n<b>• Sᴘᴇᴇᴅ:</b> {download.speed()} | <b>Eᴛᴀ Tɪᴍᴇ:</b> {download.eta()}"
                 if reply_to:
-                    msg += f"\n• Aᴅᴅᴇᴅ Bʏ: <a href='tg://user?id={download.message.from_user.id}'>{download.message.from_user.first_name}</a>(<code>{download.message.from_user.id}</code>)"
+                    msg += f"\n• Aᴅᴅᴇᴅ Bʏ: <a href='tg://user?id={download.message.from_user.id}'>{download.message.from_user.first_name}</a> (<code>{download.message.from_user.id}</code>)"
                 else:
-                    msg += f"\n• Aᴅᴅᴇᴅ Bʏ: <a href='tg://user?id={download.message.from_user.id}'>{download.message.from_user.first_name}</a>(<code>{download.message.from_user.id}</code>)"
+                    msg += f"\n• Aᴅᴅᴇᴅ Bʏ: <a href='tg://user?id={download.message.from_user.id}'>{download.message.from_user.first_name}</a> (<code>{download.message.from_user.id}</code>)"
                 try:
                     msg += f"\n<b>Aʀɪᴀ2📶</b> | • Sᴇᴇᴅʀs: {download.aria_download().num_seeders}" \
                            f" | • Pᴇᴇʀs: {download.aria_download().connections}"
@@ -170,7 +170,7 @@ def get_readable_message():
                            f" | <b>• Lᴇᴇᴄʜᴇʀs:</b> {download.torrent_info().num_leechs}"
                 except:
                     pass
-                msg += f"\n<code>/{BotCommands.CancelMirror} {download.gid()}</code>"
+                msg += f"\n• Tᴏ Cᴀɴᴄᴇʟ​: <code>/{BotCommands.CancelMirror} {download.gid()}</code>\n\n═════════════════════ "
             elif download.status() == MirrorStatus.STATUS_SEEDING:
                 msg += f"\n<b>• Sɪᴢᴇ: </b>{download.size()}"
                 msg += f"\n<b>• Sᴘᴇᴇᴅ: </b>{get_readable_file_size(download.torrent_info().upspeed)}/s"
