@@ -115,6 +115,7 @@ def get_progress_bar_string(status):
 def get_readable_message():
     with download_dict_lock:
         dlspeed_bytes = 0
+        uldl_bytes = 0
         msg = ""
         START = 0
         num_active = 0
