@@ -155,7 +155,17 @@ def get_readable_message():
                     msg += f"\n• Aᴅᴅᴇᴅ Bʏ: <a href='tg://user?id={download.message.from_user.id}'>{download.message.from_user.first_name}</a> (<code>{download.message.from_user.id}</code>)"	
                 else:	
                     msg += f"\n• Aᴅᴅᴇᴅ Bʏ: <a href='tg://user?id={download.message.from_user.id}'>{download.message.from_user.first_name}</a> (<code>{download.message.from_user.id}</code>)"		
-                try:	
+                try:
+                    msg += f"\n<i>Aria2📶</i> | • Seeders: {download.aria_download().num_seeders}" \
+                           f" | • Peers: {download.aria_download().connections}"
+                except:
+                    pass
+                try: 
+                    msg += f"\n<i>qbit🦠</i> | • Seeders: {download.torrent_info().num_seeds}" \
+                           f" | • Leechers: {download.torrent_info().num_leechs}"
+                except:
+                    pass
+                try:
                     msg += f"\n<b>• Sᴇᴇᴅʀs:</b> {download.aria_download().num_seeders}" \	
                            f" | <b>• Pᴇᴇʀs:</b> {download.aria_download().connections}"	
                 except:	
