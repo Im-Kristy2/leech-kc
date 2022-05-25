@@ -156,7 +156,7 @@ def get_readable_message():
                 else:	
                     msg += f"\n• Aᴅᴅᴇᴅ Bʏ: <a href='tg://user?id={download.message.from_user.id}'>{download.message.from_user.first_name}</a> (<code>{download.message.from_user.id}</code>)"	
                 try:	
-                    msg += f"\n<b>Aʀɪᴀ2📶</b> | • Sᴇᴇᴅʀs: {download.aria_download().num_seeders}" 	
+                    msg += f"\n<b>Aʀɪᴀ2📶</b> | • Sᴇᴇᴅʀs: {download.aria_download().num_seeders}" \	
                            f" | • Pᴇᴇʀs: {download.aria_download().connections}"	
                 except:	
                     pass	
