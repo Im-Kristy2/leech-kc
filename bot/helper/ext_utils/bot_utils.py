@@ -385,5 +385,4 @@ def get_content_type(link: str) -> str:
 
 dispatcher.add_handler(CallbackQueryHandler(refresh, pattern='^' + str(ONE) + '$'))
 dispatcher.add_handler(CallbackQueryHandler(close, pattern='^' + str(TWO) + '$'))
-dispatcher.add_handler(CallbackQueryHandler(stats, pattern='^' + str(THREE) + '$'))
-l
+dispatcher.add_handler(CallbackQueryHandler(stats, pattern='^' + str(THREE) + '$')) 
