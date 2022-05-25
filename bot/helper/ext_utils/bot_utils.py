@@ -164,16 +164,6 @@ def get_readable_message():
                     msg += f"\n<i>qbit🦠</i> | • Seeders: {download.torrent_info().num_seeds}" \
                            f" | • Leechers: {download.torrent_info().num_leechs}"
                 except:
-                    pass
-                try:
-                    msg += f"\n<b>• Sᴇᴇᴅʀs:</b> {download.aria_download().num_seeders}" \	
-                           f" | <b>• Pᴇᴇʀs:</b> {download.aria_download().connections}"	
-                except:	
-                    pass	
-                try:	
-                    msg += f"\n<b>• Sᴇᴇᴅʀs:</b> {download.torrent_info().num_seeds}" \	
-                           f" | <b>• Lᴇᴇᴄʜᴇʀs:</b> {download.torrent_info().num_leechs}"	
-                except:	
                     pass	
                 msg += f"\n• Tᴏ Cᴀɴᴄᴇʟ​: <code>/{BotCommands.CancelMirror} {download.gid()}</code>\n\n═════════════════════ "	
             elif download.status() == MirrorStatus.STATUS_SEEDING:	
