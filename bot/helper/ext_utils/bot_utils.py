@@ -10,7 +10,7 @@ from telegram import InlineKeyboardMarkup
 from telegram.ext import CallbackQueryHandler
 
 from bot.helper.telegram_helper.bot_commands import BotCommands	
-from bot import download_dict, download_dict_lock, STATUS_LIMIT, botStartTime, DOWNLOAD_DIR, OWNER_ID	
+from bot import download_dict, download_dict_lock, STATUS_LIMIT, botStartTime, DOWNLOAD_DIR, dispatcher, OWNER_ID	
 from bot.helper.telegram_helper.button_build import ButtonMaker
 
 MAGNET_REGEX = r"magnet:\?xt=urn:btih:[a-zA-Z0-9]*"	
@@ -356,3 +356,7 @@ def get_content_type(link: str) -> str:
         except:	
             content_type = None	
     return content_type	
+d4
+dispatcher.add_handler(CallbackQueryHandler(refresh, pattern='^' + str(ONE) + '$'))
+dispatcher.add_handler(CallbackQueryHandler(close, pattern='^' + str(TWO) + '$'))
+dispatcher.add_handler(CallbackQueryHandler(stats, pattern='^' + str(THREE) + '$'))
