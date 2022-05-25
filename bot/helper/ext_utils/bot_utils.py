@@ -178,20 +178,20 @@ def get_readable_message():
                     msg += f"\n<b>• Dᴏᴡɴʟᴏᴀᴅᴇᴅ:</b> {get_readable_file_size(download.processed_bytes())} of {download.size()}"	
                 msg += f"\n<b>• Sᴘᴇᴇᴅ:</b> {download.speed()} | <b>Eᴛᴀ Tɪᴍᴇ:</b> {download.eta()}"	
                 if reply_to:	
-                    msg += f"\n• Aᴅᴅᴇᴅ Bʏ: <a href='tg://user?id={download.message.from_user.id}'>{download.message.from_user.first_name}</a> (<code>{download.message.from_user.id}</code>)"	
+                    msg += f"\n<b>• Aᴅᴅᴇᴅ Bʏ: <a href='tg://user?id={download.message.from_user.id}'>{download.message.from_user.first_name}</a> (<code>{download.message.from_user.id}</code>)</b>"	
                 else:	
-                    msg += f"\n• Aᴅᴅᴇᴅ Bʏ: <a href='tg://user?id={download.message.from_user.id}'>{download.message.from_user.first_name}</a> (<code>{download.message.from_user.id}</code>)"		
+                    msg += f"\n•<b> Aᴅᴅᴇᴅ Bʏ: <a href='tg://user?id={download.message.from_user.id}'>{download.message.from_user.first_name}</a> (<code>{download.message.from_user.id}</code>)</b>"		
                 try:
-                    msg += f"\n<b>• Aʀɪᴀ2</b> | • Sᴇᴇᴅʀs: {download.aria_download().num_seeders}" \
-                           f" | • Pᴇᴇʀs: {download.aria_download().connections}"
+                    msg += f"\n<b>• Aʀɪᴀ2</b> |<b> • Sᴇᴇᴅʀs: {download.aria_download().num_seeders}</b>" \
+                           f" |<b> • Pᴇᴇʀs: {download.aria_download().connections}</b>"
                 except:
                     pass
                 try: 
-                    msg += f"\n<b>Qʙɪᴛ🦠</i> | • Sᴇᴇᴅʀs: {download.torrent_info().num_seeds}" \
-                           f" | • Lᴇᴇᴄʜᴇʀs: {download.torrent_info().num_leechs}"
+                    msg += f"\n<b>Qʙɪᴛ🦠</b> |<b> • Sᴇᴇᴅʀs: {download.torrent_info().num_seeds}</b>" \
+                           f" |<b> • Lᴇᴇᴄʜᴇʀs: {download.torrent_info().num_leechs}</b>"
                 except:
                     pass	
-                msg += f"\n• Tᴏ Cᴀɴᴄᴇʟ​: <code>/{BotCommands.CancelMirror} {download.gid()}</code>\n\n═════════════════════ "	
+                msg += f"\n<b>• Tᴏ Cᴀɴᴄᴇʟ​</b>: <code>/{BotCommands.CancelMirror} {download.gid()}</code>\n\n═════════════════════ "	
             elif download.status() == MirrorStatus.STATUS_SEEDING:	
                 msg += f"\n<b>• Sɪᴢᴇ: </b>{download.size()}"	
                 msg += f"\n<b>• Sᴘᴇᴇᴅ: </b>{get_readable_file_size(download.torrent_info().upspeed)}/s"	
@@ -219,9 +219,9 @@ def get_readable_message():
                     uldl_bytes += float(speedy.split('M')[0]) * 1048576
         dlspeed = get_readable_file_size(dlspeed_bytes)
         ulspeed = get_readable_file_size(uldl_bytes)
-        msg += f"\n📖 Pᴀɢᴇs: {PAGE_NO}/{pages} | 📝 Tᴀsᴋs: {tasks}"
-        msg += f"\nBᴏᴛ Uᴘᴛɪᴍᴇ: <code>{currentTime}</code>"
-        msg += f"\nDʟ: {dlspeed}/s🔻 | Uʟ: {ulspeed}/s🔺"
+        msg += f"\n<b>📖 Pᴀɢᴇs: {PAGE_NO}/{pages} | 📝 Tᴀsᴋs: {tasks}</b>"
+        msg += f"\n<b>Bᴏᴛ Uᴘᴛɪᴍᴇ: <code>{currentTime}</code></b>"
+        msg += f"\n<b>Dʟ: {dlspeed}/s🔻 | Uʟ: {ulspeed}/s🔺</b>"
         buttons = ButtonMaker()
         buttons.sbutton("🔄", str(ONE))
         buttons.sbutton("❌", str(TWO))
@@ -386,3 +386,4 @@ def get_content_type(link: str) -> str:
 dispatcher.add_handler(CallbackQueryHandler(refresh, pattern='^' + str(ONE) + '$'))
 dispatcher.add_handler(CallbackQueryHandler(close, pattern='^' + str(TWO) + '$'))
 dispatcher.add_handler(CallbackQueryHandler(stats, pattern='^' + str(THREE) + '$'))
+l
