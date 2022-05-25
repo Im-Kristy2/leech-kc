@@ -182,13 +182,13 @@ def get_readable_message():
                 else:	
                     msg += f"\n• Aᴅᴅᴇᴅ Bʏ: <a href='tg://user?id={download.message.from_user.id}'>{download.message.from_user.first_name}</a> (<code>{download.message.from_user.id}</code>)"		
                 try:
-                    msg += f"\n<i>Aria2📶</i> | • Seeders: {download.aria_download().num_seeders}" \
-                           f" | • Peers: {download.aria_download().connections}"
+                    msg += f"\n<b>• Aʀɪᴀ2</b> | • Sᴇᴇᴅʀs: {download.aria_download().num_seeders}" \
+                           f" | • Pᴇᴇʀs: {download.aria_download().connections}"
                 except:
                     pass
                 try: 
-                    msg += f"\n<i>qbit🦠</i> | • Seeders: {download.torrent_info().num_seeds}" \
-                           f" | • Leechers: {download.torrent_info().num_leechs}"
+                    msg += f"\n<b>Qʙɪᴛ🦠</i> | • Sᴇᴇᴅʀs: {download.torrent_info().num_seeds}" \
+                           f" | • Lᴇᴇᴄʜᴇʀs: {download.torrent_info().num_leechs}"
                 except:
                     pass	
                 msg += f"\n• Tᴏ Cᴀɴᴄᴇʟ​: <code>/{BotCommands.CancelMirror} {download.gid()}</code>\n\n═════════════════════ "	
@@ -219,9 +219,9 @@ def get_readable_message():
                     uldl_bytes += float(speedy.split('M')[0]) * 1048576
         dlspeed = get_readable_file_size(dlspeed_bytes)
         ulspeed = get_readable_file_size(uldl_bytes)
-        msg += f"\n📖 Pages: {PAGE_NO}/{pages} | 📝 Tasks: {tasks}"
-        msg += f"\nBOT UPTIME: <code>{currentTime}</code>"
-        msg += f"\nDL: {dlspeed}/s🔻 | UL: {ulspeed}/s🔺"
+        msg += f"\n📖 Pᴀɢᴇs: {PAGE_NO}/{pages} | 📝 Tᴀsᴋs: {tasks}"
+        msg += f"\nBᴏᴛ Uᴘᴛɪᴍᴇ: <code>{currentTime}</code>"
+        msg += f"\nDʟ: {dlspeed}/s🔻 | Uʟ: {ulspeed}/s🔺"
         buttons = ButtonMaker()
         buttons.sbutton("🔄", str(ONE))
         buttons.sbutton("❌", str(TWO))
@@ -244,7 +244,7 @@ def refresh(update, context):
     chat_id  = update.effective_chat.id
     query = update.callback_query
     user_id = update.callback_query.from_user.id
-    query.edit_message_text(text="Refreshing...👻")
+    query.edit_message_text(text="Rᴇꜰʀᴇsʜɪɴɢ...👻")
     sleep(1)
     query.answer(text="Refreshed", show_alert=False)
     
@@ -277,14 +277,17 @@ def bot_sys_stats():
     recv = get_readable_file_size(net_io_counters().bytes_recv)
     sent = get_readable_file_size(net_io_counters().bytes_sent)
     stats = f"""
-BOT UPTIME: {currentTime}
-CPU: {progress_bar(cpu)} {cpu}%
-RAM: {progress_bar(mem)} {mem}%
-DISK: {progress_bar(disk)} {disk}%
-TOTAL: {total}
-USED: {used} || FREE: {free}
-SENT: {sent} || RECV: {recv}
-#KristyCloud
+Bᴏᴛ Uᴘᴛɪᴍᴇ: {currentTime}
+
+Cᴘᴜ: {progress_bar(cpu)} {cpu}%
+Rᴀᴍ: {progress_bar(mem)} {mem}%
+Dɪsᴋ: {progress_bar(disk)} {disk}%
+
+Tᴏᴛᴀʟ: {total}
+Usᴇᴅ: {used} || Fʀᴇᴇ: {free}
+Sᴇɴᴛ: {sent} || Rᴇᴄᴠ: {recv}
+
+#KʀɪsᴛʏCʟᴏᴜᴅ
 """
     return stats	
 
