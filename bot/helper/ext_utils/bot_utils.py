@@ -1,9 +1,9 @@
 from re import match as re_match, findall as re_findall	 
 from threading import Thread, Event	
-from time import time	
+from time import time, sleep	
 from math import ceil	
 from html import escape	
-from psutil import virtual_memory, cpu_percent, disk_usage	
+from psutil import virtual_memory, cpu_percent, disk_usage, net_io_counters
 from requests import head as rhead	
 from urllib.request import urlopen	
 from telegram import InlineKeyboardMarkup	
