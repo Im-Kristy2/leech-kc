@@ -359,3 +359,6 @@ def get_content_type(link: str) -> str:
             content_type = None
     return content_type
 
+dispatcher.add_handler(CallbackQueryHandler(refresh, pattern='^' + str(ONE) + '$'))
+dispatcher.add_handler(CallbackQueryHandler(close, pattern='^' + str(TWO) + '$'))
+dispatcher.add_handler(CallbackQueryHandler(stats, pattern='^' + str(THREE) + '$'))
